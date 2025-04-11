@@ -26,7 +26,7 @@
   * If not, see <https://www.gnu.org/licenses/>.
   * @attention
   *
-  * Copyright (c) 2022 STMicroelectronics.
+  * Copyright (c) 2025 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -67,8 +67,8 @@
   * @{
   */
 /* Define size for the receive and transmit buffer over CDC */
-#define APP_RX_DATA_SIZE  1000
-#define APP_TX_DATA_SIZE  1000
+#define APP_RX_DATA_SIZE  1024
+#define APP_TX_DATA_SIZE  1024
 /* USER CODE BEGIN EXPORTED_DEFINES */
 
 /* USER CODE END EXPORTED_DEFINES */
@@ -133,10 +133,10 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
 uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 
 /* USER CODE BEGIN EXPORTED_FUNCTIONS */
-void vcp_init ();
-int vcp_send (uint8_t* buf, uint16_t len);
-int vcp_recv (uint8_t* buf, uint16_t len);
-void vcp_service ();
+void vcp_init();
+int vcp_send(uint8_t* buf, uint16_t len);
+int vcp_recv(uint8_t* buf, uint16_t len);
+void vcp_service();
 /* USER CODE END EXPORTED_FUNCTIONS */
 
 /**
