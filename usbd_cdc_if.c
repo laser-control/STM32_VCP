@@ -314,7 +314,7 @@ static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
   *         Data to send over USB IN endpoint are sent over CDC interface
   *         through this function.
   *         @note
-  *
+  * The function is not used! See vcp_undertake_transmission()
   *
   * @param  Buf: Buffer of data to be sent
   * @param  Len: Number of data to be sent (in bytes)
