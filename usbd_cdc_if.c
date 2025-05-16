@@ -340,7 +340,7 @@ void vcp_init()
   while (vcp_tx_fifo.data == 0);		// Wait until the CDC library calls CDC_Init_FS, by checking for a non-null buffer pointer
 }
 
-int vcp_send(uint8_t* buf, uint16_t len)
+int vcp_send_to_fifo(uint8_t* buf, uint16_t len)
 {
   // Step 1 : calculate the occupied space in the Tx FIFO
   int cap = vcp_tx_fifo.wr - vcp_tx_fifo.rd;   // occupied capacity
@@ -374,7 +374,7 @@ int vcp_send(uint8_t* buf, uint16_t len)
   return 0;  // successful completion
 }
 
-int vcp_recv (uint8_t* buf, uint16_t len)
+int vcp_get_from_fifo (uint8_t* buf, uint16_t len)
 {
   // Compute how much data is in the FIFO
   int cap = vcp_rx_fifo.wr - vcp_rx_fifo.rd;
@@ -400,7 +400,7 @@ int vcp_recv (uint8_t* buf, uint16_t len)
   return retval;
 }
 
-void vcp_service ()
+void vcp_undertake_transmission()
 {
   USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
   // Test if the USB CDC is ready to transmit
