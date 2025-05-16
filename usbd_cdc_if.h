@@ -139,7 +139,9 @@ void vcp_init();
 /**
  * This function will copy the data from the provided buffer to the FIFO. It will
  * also update the FIFO write index to reflect the completion of the last
- * transmission. 
+ * transmission.
+ * buf -> the data to send
+ * len -> the number of the bytes to send
  * (The transmission is not done yet, it will be done in the vcp_undertake_transmission() function.)
  * The function will return 0 on success and -1 on error.
  */
@@ -148,8 +150,10 @@ int vcp_send_to_fifo(uint8_t* buf, uint16_t len);
 /**
  * This function will read the data from the FIFO and copy it to the provided
  * buffer. The function will return the number of bytes read.
- * Since the FIFO is loaded asynchronously from USB, the function must be called reguluarly
+ * Since the FIFO is loaded asynchronously from USB, the function must be called regularly
  * to avoid overflows.
+ * buf -> the placeholder to copy the bytes to
+ * len -> the limit to read
  * The function will return 0 if the FIFO is empty, and the number of bytes read otherwise.
  */
 int vcp_get_from_fifo(uint8_t* buf, uint16_t len);
@@ -157,8 +161,7 @@ int vcp_get_from_fifo(uint8_t* buf, uint16_t len);
 /**
  * When the USB CDC is ready to transmit, this function will send the data
  * from the buffer to the USB host. It will also update the FIFO read index
- * to reflect the completion of the last transmission. The function will
- * compute how much data is in the FIFO and send it to the USB host.
+ * to reflect the completion of the last transmission.
  * The function must be called at regular intervals to ensure that the data
  * is sent to the USB host in a timely manner (for instance in SysTick_Handler())
 */    
